@@ -2,10 +2,8 @@ import Nav from './Nav'
 import {useState,useEffect,useRef} from 'react'
 import { FaChevronDown,FaChevronUp } from 'react-icons/fa';
 import Country from './Country'
-import data from './data.json'
 import {Link} from 'react-router-dom'
-export default function Main({mode,setMode,lightStyle,darkStyle}) {
-  const [countries,setCountries]=useState(data)
+export default function Main({mode,setMode,lightStyle,darkStyle,countries,setCountries}) {
   const [options,setOptions]=useState(false)
   const [value,setValue]=useState('')
   const [filteredCountries,setFilteredCountries]=useState(countries)
@@ -62,7 +60,7 @@ setTimeout(()=>{
         <div  className='input-field d-flex justify-content-lg-between align-items-start align-items-lg-center flex-column flex-lg-row '>
         <div style={mode?light:dark} className={`p-3 shadow ${!mode?'dark-input':''}`}><img style={{width:'24px',height:'24px'}} src='/images/search-icon.png'/><input style={mode?light:dark} value={value} onChange={(e)=>{setValue(e.target.value)}} className='border-0 mx-3' placeholder='Search for a country...' type='text' /></div>
         <div className='position-relative '>
-          <div style={mode?light:dark} onClick={handleToggle} className='d-flex align-items-center justify-content-between shadow p-3 toggle-btn'>
+          <div style={mode?light:dark} onClick={handleToggle} className='d-flex align-items-center justify-content-between shadow p-3 toggle-btn mt-lg-0 mt-2'>
           <p className='filter-button p-0'>Filter by region</p>{!options? < FaChevronDown/>:<FaChevronUp/>}
             </div>
        { options && <div style={mode?light:dark}  ref={regionsDiv} className='dropdown-options position-absolute rounded w-100'>

@@ -1,8 +1,10 @@
 import './App.css'
 import Detail from './components/Detail'
 import Main from './components/Main'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
+import Loader from './components/Loader'
+import data from './components/data.json'
 
 export default function App() {
   const [mode,setMode]=useState(true)
@@ -16,14 +18,32 @@ export default function App() {
     background:'hsl(0, 0%, 98%)',
     transition:'0.6s all'
   }
+  //fetch data
+  const [countries,setCountries]=useState([])  
+  const url='https://restcountries.com/v2/all'
+  const getData=async()=>{
+    try{
+    const data=await fetch(url)
+    const res=await data.json();
+    setCountries(res)   
+    }
+    catch{
+      setCountries(data);
+      console.log('failed to load from server, using local data. might not be uptodate')
+    }
+   
+  }
+  useEffect(()=>{
+    getData();
+  },[])
   return (
     <BrowserRouter>
-    <main style={mode?lightStyle:darkStyle}>
+      {countries.length>0 ? <main style={mode?lightStyle:darkStyle}>
       <Routes>
-        <Route path='/' element={<Main mode={mode} setMode={setMode} lightStyle={lightStyle} darkStyle={darkStyle} />}/>
+        <Route path='/' element={<Main mode={mode} setMode={setMode} lightStyle={lightStyle} darkStyle={darkStyle} countries={countries} setCountries={setCountries} />}/>
       <Route path={`/country/:id`} element={<Detail/>}/>
       </Routes>
-    </main>        
+    </main> :<Loader/>}       
       </BrowserRouter>
   )
 }
