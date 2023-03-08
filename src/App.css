@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,600;0,800;1,300&family=Poppins:wght@500;700&display=swap');
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box
+}
+body{
+  font-family: 'Nunito Sans', sans-serif;
+  background: #f1f8f5
+}
+/* nav bar */
+nav img{
+  height:20px;
+  width:20px;
+}
+nav{
+  background:white;
+}
+
+/* input field */
+.input-field input:focus{
+  outline:none;
+}
+.dropdown-options{
+  top:105%;
+  z-index:999
+}
+.filter-button{
+  margin:0 30px 0 0 ;
+}
+.filter-button:focus{
+  outline:none;
+  border:none;
+}
+.dark-input input::placeholder{
+  color:white;
+}
+/* countries */
+.card img{
+  height:150px;
+}
+.card:hover{
+  transform:translateY(-7px);
+  transition:0.3s all;
+}
+.dropdown-options p:hover{
+  background:#121212;
+  color:white;
+  cursor:pointer;
+}
+
+.countries{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+}
+.countries a{
+  color:black;
+  text-decoration:none;
+}
+.toggle-btn{
+  cursor:pointer;
+}
+.toggle-btn:hover{
+  outline:1px solid aqua;
+}
+/* mobile */
+@media (max-width: 1020px) {
+.dropdown-options{
+top:107%;
+}
+.card{
+    width:18rem !important;
+  }
+.card img{
+    height:170px
+  }
+  .countries{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media (max-width: 540px) {
+  .countries{
+    grid-template-columns:1fr;
+  }
+}
